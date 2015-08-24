@@ -16,7 +16,6 @@
 \date{\today}
 
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{postulate}{Postulate}[section]
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \theoremstyle{remark}
@@ -54,9 +53,9 @@ Next we should define a root, an aspect of a tree. We will also need to prove so
 A root is a node in a tree that has no parents. Alternatively, a root is a node to which no edges point.
 \end{definition}
 
-\begin{postulate}[Existence of Roots]
+\begin{theorem}[Existence of Roots]
 Every tree has a root.
-\end{postulate}
+\end{theorem}
 
 \begin{proof}
 We proceed with a proof by contradiction. Consider a tree with no root. Since we've defined trees to be necessarily finite, we may label nodes as $1 , 2 , ... , n$. Start with node $n$ and consider its parent. There are $n-1$ possible parents for node $n$. Without loss of generality, suppose that
@@ -65,9 +64,9 @@ could be a parent to a newly considered node without violating the first propert
 we have a contradiction.
 \end{proof}
 
-\begin{postulate}[Uniqueness of Roots]
+\begin{theorem}[Uniqueness of Roots]
 Every tree has no more than one root.
-\end{postulate}
+\end{theorem}
 
 \begin{proof}
 Consider a tree of $n$-many nodes ($1$ through $n$). Let nodes $1$ and $2$ be two roots of our tree. Since $1$ and $2$ are two nodes, by the third property, there is a path (ignoring orientation) between $1$ and $2$. We have three possible cases to consider for this path.
@@ -79,7 +78,7 @@ Consider a tree of $n$-many nodes ($1$ through $n$). Let nodes $1$ and $2$ be tw
 These cases are exhaustive, and each leads to a contradiction. Hence, the assumption must be false.
 \end{proof}
 
-These two postulates prove that every tree has exactly one root (using our aforementioned definition). In contrast, there is no limit on the number of nodes of the next type in a given tree.
+These two theorems prove that every tree has exactly one root (using our aforementioned definition). In contrast, there is no limit on the number of nodes of the next type in a given tree.
 
 \begin{definition}[Leaf]
 A leaf is a node that is the parent to no other nodes.
@@ -87,9 +86,9 @@ A leaf is a node that is the parent to no other nodes.
 
 By the same logic as our previous existence proof, it is easy to prove the following result.
 
-\begin{postulate}
+\begin{theorem}
 Every tree has a leaf.
-\end{postulate}
+\end{theorem}
 
 With this foundation on trees in mind, we will now introduce a type of tree that is particularly interesting for the development of search algorithms.
 
@@ -137,5 +136,44 @@ Given a binary tree, we can perform what is called a \emph{post-order traversal}
 	\item{Display the node}
 \end{enumerate}
 \end{definition}
+
+These three definitions provide distinct methods to characterize binary trees as an ordered list of nodes. Considering the example above, the pre-order traversal is F,B,A,D,C,E,G,I,H. The in-order traversal is A,B,C,D,E,F,G,H,I. The post-order traversal is A,C,E,D,B,H,I,G.
+
+An important limitation of these traversals is that none of them uniquely define a binary tree.
+
+\begin{theorem}
+The pre-, in-, and post-order traversal methods each do not uniquely define binary trees.
+\end{theorem}
+
+\begin{proof}
+What this claim means is that two binary trees could be represented by the same pre-, in-, or post-order traversal. This claim only asserts that one of the three traversals could be the same. To prove this, we need only find examples of two distinct binary trees with the same of one of these
+traversals.
+
+Pre-Order Traversal: a chain from A to B to C is equivalent to A with a left leaf B and a right leaf C.
+
+In-Order Traversal: a chain made by C with a left leaf B with a left leaf A is equivalent to B with a left leaf A and a right leaf C.
+
+Post-Order Traversal: a chain made by A with a right leaf B with a right leaf C is equivalent to A with a left leaf C and a right leaf B.
+\end{proof}
+
+Next we will prove a stronger result before proving the result that will establish context for further study.
+
+\begin{theorem}
+The combination of pre-order and post-order traversals does not uniquely define binary trees.
+\end{theorem}
+
+\begin{proof}
+Consider the two trees as follows: A with left leaf B with left leaf C, and A with right leaf B with right leaf C. The pre-order traversal of each of these is A,B,C. The post-order traversal of each of these is C,B,A.
+\end{proof}
+
+\begin{theorem}
+The combination of in-order traversal with either pre-order traversal or post-order traversal uniquely defines binary trees.
+\end{theorem}
+
+\begin{proof}
+Without loss of generality, we may consider the case of in-order traversal and pre-order traversal. Post-order traversal follows the same train of logic as pre-order traversal.
+
+Consider two binary trees with the same pre-order traversal and the same in-order traversal. We seek to prove that the two binary trees are identical. First note that the trees must contain the same nodes.
+\end{proof}
 
 \end{document}
